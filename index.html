@@ -275,6 +275,18 @@
     .hero .slogan span { display: block; margin-top: 7px; font-style: normal; font-weight: 800; font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: var(--hero-muted); }
     .foot-slogan { margin-top: 10px; font-style: italic; font-weight: 800; color: var(--gold); font-size: 14px; }
     .foot-slogan span { display: block; font-style: normal; font-weight: 700; font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: #8497bd; margin-top: 2px; }
+
+    /* ---- tasa BCV (barra utility) ---- */
+    .util .wrap { flex-wrap: wrap; row-gap: 3px; }
+    .bcv { display: none; align-items: center; gap: 9px; font-weight: 700; }
+    .bcv.show { display: inline-flex; }
+    .bcv-tag { font-size: 10px; font-weight: 850; letter-spacing: .13em; color: var(--gold); background: rgba(244,194,13,.12); border: 1px solid rgba(244,194,13,.30); padding: 2px 7px; border-radius: var(--r-pill); }
+    .bcv-i { display: inline-flex; align-items: baseline; gap: 5px; color: #dbe5f7; }
+    .bcv-i i { font-style: normal; font-weight: 850; color: #8fa6cf; font-size: 13px; }
+    .bcv-i b { font-weight: 750; color: #eef3fc; font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+    .bcv-sep { width: 1px; height: 13px; background: rgba(255,255,255,.18); }
+    @media (max-width: 600px) { .bcv-tag { display: none; } .bcv { gap: 8px; } }
+    @media (max-width: 380px) { .util .gov { font-size: 11px; } }
 </style>
 </head>
 <body>
@@ -296,6 +308,12 @@
 <div class="util">
     <div class="wrap">
         <span class="gov"><span class="dot"></span> República Bolivariana de Venezuela <span class="long">· Estado Bolivariano de Miranda</span></span>
+        <span class="bcv" id="bcv" title="Tasa oficial del Banco Central de Venezuela" aria-label="Tasa oficial del BCV">
+            <span class="bcv-tag">BCV</span>
+            <span class="bcv-i"><i>$</i><b id="bcvUsd">—</b></span>
+            <span class="bcv-sep"></span>
+            <span class="bcv-i"><i>€</i><b id="bcvEur">—</b></span>
+        </span>
         <button id="themeBtn" type="button" aria-label="Cambiar tema"><span id="themeIcon">🌙</span> <span id="themeTxt">Oscuro</span></button>
     </div>
 </div>
@@ -571,6 +589,36 @@
         // Reveal
         var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: .12 });
         document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+
+        // --- Tasa oficial BCV (dólar y euro) — se actualiza automáticamente cada 3 horas ---
+        (function () {
+            var W = document.getElementById('bcv'); if (!W) return;
+            var U = document.getElementById('bcvUsd'), E = document.getElementById('bcvEur');
+            var KEY = 'bcvTasa', TTL = 3 * 60 * 60 * 1000; // 3 horas
+            var API_USD = 'https://ve.dolarapi.com/v1/dolares/oficial'; // BCV (fuente oficial), CORS abierto
+            var API_EUR = 'https://ve.dolarapi.com/v1/euros/oficial';
+            function fmt(n) { return 'Bs ' + Number(n).toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+            function paint(d) {
+                if (!d || d.usd == null || d.eur == null) return;
+                U.textContent = fmt(d.usd); E.textContent = fmt(d.eur);
+                W.classList.add('show');
+                if (d.fecha) { try { W.title = 'Tasa oficial del BCV · actualizada el ' + new Date(d.fecha).toLocaleDateString('es-VE', { day: '2-digit', month: '2-digit', year: 'numeric' }); } catch (e) {} }
+            }
+            function cache() { try { return JSON.parse(localStorage.getItem(KEY)); } catch (e) { return null; } }
+            function fetchOne(u) { return fetch(u, { cache: 'no-store' }).then(function (r) { if (!r.ok) throw 0; return r.json(); }); }
+            function refresh() {
+                return Promise.all([fetchOne(API_USD), fetchOne(API_EUR)]).then(function (a) {
+                    var d = { usd: a[0] && a[0].promedio, eur: a[1] && a[1].promedio, fecha: (a[0] && a[0].fechaActualizacion) || null, ts: Date.now() };
+                    if (d.usd == null || d.eur == null) return;
+                    try { localStorage.setItem(KEY, JSON.stringify(d)); } catch (e) {}
+                    paint(d);
+                }).catch(function () { /* silencioso: si hay caché, ya quedó pintada */ });
+            }
+            var c = cache();
+            if (c) paint(c);                                       // muestra al instante lo último conocido
+            if (!c || (Date.now() - (c.ts || 0)) > TTL) refresh(); // busca si no hay caché o venció (>3 h)
+            setInterval(refresh, TTL);                             // y cada 3 h si la pestaña queda abierta
+        })();
     })();
 </script>
 
