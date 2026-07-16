@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Registro Civil — Alcaldía del Municipio Cristóbal Rojas</title>
+<meta name="description" content="Oficina de Registro Civil de la Alcaldía del Municipio Cristóbal Rojas, Charallave. Actas de nacimiento, matrimonio, defunción, constancias y más." />
+<style>
+  :root{--navy:#0a2351;--navy2:#123571;--blue:#0a6cb0;--gold:#f4c20d;--red:#d21534;--ink:#0f172a;--muted:#5b6678;--line:#dfe5f0;--bg:#eef2f9;--surface:#fff;--sans:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .tri{height:5px;display:flex}.tri i{flex:1}.tri i:nth-child(1){background:var(--gold)}.tri i:nth-child(2){background:var(--blue)}.tri i:nth-child(3){background:var(--red)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  .util{background:#061634;color:#b9c8e6;font-size:12.5px}
+  .util .wrap{display:flex;align-items:center;justify-content:space-between;min-height:34px;gap:10px}
+  .util a{color:#cdd9f0;font-weight:600}
+  header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+  .head{display:flex;align-items:center;gap:12px;min-height:64px}
+  .head .seal{width:40px;height:46px;flex:none}
+  .head b{display:block;font-size:15px;font-weight:850;letter-spacing:-.01em}
+  .head span{display:block;font-size:11.5px;color:var(--muted)}
+  .head .sp{flex:1}
+  .btn{background:var(--navy);color:#fff;border:none;border-radius:9px;padding:10px 18px;font-weight:750;font-size:14px;display:inline-flex;align-items:center;gap:8px}
+  .btn:hover{background:var(--navy2)}
+  .btn.gold{background:var(--gold);color:#3a2b00}.btn.gold:hover{background:#ffd23a}
+  .hero{background:linear-gradient(155deg,#0a2351,#071a3d 60%,#0b2454);color:#eef3ff;position:relative;overflow:hidden}
+  .hero .wrap{padding:52px 20px 60px;position:relative;max-width:820px}
+  .hero .eyebrow{color:var(--gold);font-size:.76rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+  .hero h1{font-size:clamp(1.9rem,5vw,3rem);font-weight:880;letter-spacing:-.025em;line-height:1.07;margin:14px 0 0;text-wrap:balance}
+  .hero p{color:#aebfdf;font-size:1.06rem;max-width:60ch;margin-top:16px}
+  .hero .cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+  .hero .seal-bg{position:absolute;right:-30px;top:50%;transform:translateY(-50%);width:280px;opacity:.07;pointer-events:none}
+  section{padding:clamp(40px,6vw,64px) 0}
+  .sec-h{max-width:640px;margin-bottom:26px}
+  .sec-h .eyebrow{color:var(--blue);font-size:.74rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+  .sec-h h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:850;letter-spacing:-.02em;margin-top:8px}
+  .sec-h p{color:var(--muted);margin-top:8px}
+  .rule{width:54px;height:4px;border-radius:3px;background:var(--gold);margin-top:10px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+  .item{background:#fff;border:1px solid var(--line);border-radius:13px;padding:18px;box-shadow:0 1px 2px rgba(11,23,48,.04),0 10px 26px rgba(11,23,48,.05);transition:.15s}
+  .item:hover{transform:translateY(-3px);box-shadow:0 20px 40px rgba(10,35,81,.1);border-color:#c3d3ec}
+  .item .ic{width:44px;height:44px;border-radius:11px;background:#e6f0fb;color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:11px}
+  .item h3{font-size:1.03rem;font-weight:780}
+  .item p{font-size:.9rem;color:var(--muted);margin-top:4px}
+  .grupo-t{grid-column:1/-1;font-size:12px;font-weight:800;color:#94a3b8;text-transform:uppercase;letter-spacing:.06em;margin-top:10px}
+  .band{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .info-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:34px;align-items:center}
+  @media(max-width:800px){.info-grid{grid-template-columns:1fr;gap:22px}}
+  .info-grid p{color:#334155;margin-top:12px}
+  .facts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .fact{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:14px}
+  .fact span{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:800}
+  .fact b{display:block;font-size:1.05rem;margin-top:3px}
+  .cbox{background:var(--navy);color:#eef3ff;border-radius:14px;padding:26px;text-align:center;margin-top:20px}
+  .cbox h3{font-size:1.2rem;font-weight:820}
+  .cbox p{color:#aebfdf;margin:8px 0 16px}
+  footer{background:#05122c;color:#9fb0d2;padding:26px 0;font-size:13px;text-align:center}
+  footer b{color:#fff}
+</style>
+</head>
+<body>
+  <div class="tri"><i></i><i></i><i></i></div>
+  <div class="util"><div class="wrap"><span>República Bolivariana de Venezuela · Estado Miranda</span><a href="../">← Portal de la Alcaldía</a></div></div>
+  <header><div class="wrap head">
+    <svg class="seal" viewBox="0 0 48 56"><path d="M24 2 44 9v20c0 13-9 21-20 25C13 50 4 42 4 29V9z" fill="#123571" stroke="#f4c20d" stroke-width="2"/><path d="M24 12l2.6 5.6 6 .8-4.4 4.3 1.1 6L24 31.9 18.7 34.7l1.1-6-4.4-4.3 6-.8z" fill="#f4c20d"/></svg>
+    <div><b>Registro Civil</b><span>Alcaldía del Municipio Cristóbal Rojas · Charallave</span></div>
+    <div class="sp"></div>
+    <a class="btn" href="sistema.html">🔐 Entrar al sistema</a>
+  </div></header>
+
+  <section class="hero"><div class="wrap">
+    <svg class="seal-bg" viewBox="0 0 48 56"><path d="M24 2 44 9v20c0 13-9 21-20 25C13 50 4 42 4 29V9z" fill="#fff"/></svg>
+    <p class="eyebrow">Oficina Municipal de Registro Civil</p>
+    <h1>Todos los actos y constancias del Registro Civil, en un solo lugar</h1>
+    <p>Registramos los hechos vitales y estados civiles de los ciudadanos del Municipio Cristóbal Rojas: nacimientos, matrimonios, uniones estables de hecho, defunciones y las constancias que necesitas para tus trámites.</p>
+    <div class="cta"><a class="btn gold" href="sistema.html">Entrar al sistema →</a></div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="sec-h"><p class="eyebrow">Actos registrales</p><h2>Actas que se levantan</h2><div class="rule"></div><p>Documentos con número de acta que constituyen o modifican el estado civil.</p></div>
+    <div class="grid">
+      <div class="item"><div class="ic">👶</div><h3>Acta de Nacimiento</h3><p>Presentación de nacimientos, reconocimientos e inserciones.</p></div>
+      <div class="item"><div class="ic">💍</div><h3>Acta de Matrimonio</h3><p>Celebración y registro del vínculo matrimonial.</p></div>
+      <div class="item"><div class="ic">🤝</div><h3>Unión Estable de Hecho</h3><p>Registro de concubinato y su disolución (conjunta o unilateral).</p></div>
+      <div class="item"><div class="ic">🕊️</div><h3>Acta de Defunción</h3><p>Registro de defunciones y permisos asociados.</p></div>
+      <div class="item"><div class="ic">🌐</div><h3>Naturalización</h3><p>Actas de naturalización (Modelos I y II).</p></div>
+      <div class="item"><div class="ic">⚰️</div><h3>Permisos de Cementerio</h3><p>Enterramiento, cremación y exhumación.</p></div>
+    </div>
+  </div></section>
+
+  <section style="padding-top:0"><div class="wrap">
+    <div class="sec-h"><p class="eyebrow">Constancias</p><h2>Constancias y certificaciones</h2><div class="rule"></div><p>Documentos que certifican una condición del ciudadano.</p></div>
+    <div class="grid">
+      <div class="item"><div class="ic">📝</div><h3>Fe de Vida</h3></div>
+      <div class="item"><div class="ic">🏠</div><h3>Carta de Residencia</h3></div>
+      <div class="item"><div class="ic">💐</div><h3>Carta de Soltería</h3></div>
+      <div class="item"><div class="ic">⭐</div><h3>Buena Conducta</h3></div>
+      <div class="item"><div class="ic">❓</div><h3>Pérdida de Documentos</h3></div>
+      <div class="item"><div class="ic">💰</div><h3>Expensa</h3></div>
+      <div class="item"><div class="ic">🍼</div><h3>Manutención</h3></div>
+      <div class="item"><div class="ic">🖤</div><h3>Viudez</h3></div>
+      <div class="item"><div class="ic">🖨️</div><h3>Entrega de Copias</h3><p>De actas de nacimiento, matrimonio y defunción.</p></div>
+    </div>
+  </div></section>
+
+  <div class="band"><section><div class="wrap info-grid">
+    <div>
+      <div class="sec-h" style="margin-bottom:0"><p class="eyebrow">La oficina</p><h2>Registro Civil del Municipio Cristóbal Rojas</h2><div class="rule"></div>
+      <p>La Oficina de Registro Civil da fe pública de los hechos y actos relativos al estado civil de las personas. Su información se maneja con reserva y responsabilidad, conforme a la Ley Orgánica de Registro Civil.</p></div>
+      <div class="cbox">
+        <h3>¿Eres funcionario del Registro Civil?</h3>
+        <p>Ingresa al sistema para cargar y consultar los trámites.</p>
+        <a class="btn gold" href="sistema.html">🔐 Entrar al sistema</a>
+      </div>
+    </div>
+    <div class="facts">
+      <div class="fact"><span>Municipio</span><b>Cristóbal Rojas</b></div>
+      <div class="fact"><span>Capital</span><b>Charallave</b></div>
+      <div class="fact"><span>Estado</span><b>Miranda</b></div>
+      <div class="fact"><span>Horario</span><b>Lun–Vie · 8:00 a.m.–4:00 p.m.</b></div>
+    </div>
+  </div></section></div>
+
+  <footer><div class="wrap">
+    <b>Alcaldía del Municipio Cristóbal Rojas</b> · Oficina de Registro Civil · Charallave, estado Miranda.<br>
+    <span style="color:#7386ac">© 2026 · Al servicio del pueblo de Charallave.</span>
+  </div></footer>
+</body>
+</html>
