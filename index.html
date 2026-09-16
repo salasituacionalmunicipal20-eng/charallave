@@ -23,9 +23,9 @@
         --sans: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
         --maxw: 1180px; --pad: clamp(16px, 4.2vw, 30px);
         --r: 16px; --r-sm: 11px; --r-pill: 999px;
-        --hero-ink: #eef3ff; --hero-muted: #aebfdf;
         --velo: rgba(238,242,249,.74); --pie: #e7ecf7; --pie-ink: #3d4863; --pie-fuerte: #0b1730; --pie-tenue: #6a7690; --pie-linea: rgba(11,23,48,.12);
         --panel: #ffffff; --panel-ink: #0b1730; --panel-muted: #3d4863; --panel-linea: #dce3f0; --panel-suave: #eef3fb; --grad-seccion: linear-gradient(155deg, #f4f8ff 0%, #e9f0fc 55%, #f2f6ff 100%);
+        --util-bg: #ffffff; --util-ink: #1c2b4a; --util-linea: rgba(6,22,52,.10); --hero-ink: #0b1730; --hero-muted: #3d4863; --hero-velo: linear-gradient(100deg, rgba(244,247,252,.94) 0%, rgba(240,244,251,.88) 42%, rgba(240,244,251,.55) 70%, rgba(240,244,251,.28) 100%); --hero-velo-movil: linear-gradient(180deg, rgba(244,247,252,.92) 0%, rgba(240,244,251,.86) 60%, rgba(240,244,251,.72) 100%);
     }
     @media (prefers-color-scheme: dark) {
         :root {
@@ -37,6 +37,7 @@
             --shadow-lg: 0 34px 80px rgba(0,0,0,.55);
             --velo: rgba(7,14,28,.60); --pie: #05122c; --pie-ink: #9fb0d2; --pie-fuerte: #ffffff; --pie-tenue: #8497bd; --pie-linea: rgba(255,255,255,.09);
         --panel: #0a2351; --panel-ink: #eef3ff; --panel-muted: #aebfdf; --panel-linea: rgba(255,255,255,.18); --panel-suave: rgba(255,255,255,.07); --grad-seccion: linear-gradient(155deg, #0a2351 0%, #071a3d 55%, #0b2454 100%);
+        --util-bg: #0d1b33; --util-ink: #cfdbf2; --util-linea: rgba(255,255,255,.10); --hero-ink: #eef3ff; --hero-muted: #aebfdf; --hero-velo: linear-gradient(100deg, rgba(6,16,40,.94) 0%, rgba(6,16,40,.86) 42%, rgba(7,20,50,.42) 70%, rgba(7,20,50,.16) 100%); --hero-velo-movil: linear-gradient(180deg, rgba(6,16,40,.80) 0%, rgba(6,16,40,.70) 60%, rgba(7,20,50,.58) 100%);
         }
     }
     :root[data-theme="light"] {
@@ -48,6 +49,7 @@
         --shadow-lg: 0 30px 70px rgba(10,35,81,.22);
         --velo: rgba(238,242,249,.74); --pie: #e7ecf7; --pie-ink: #3d4863; --pie-fuerte: #0b1730; --pie-tenue: #6a7690; --pie-linea: rgba(11,23,48,.12);
         --panel: #ffffff; --panel-ink: #0b1730; --panel-muted: #3d4863; --panel-linea: #dce3f0; --panel-suave: #eef3fb; --grad-seccion: linear-gradient(155deg, #f4f8ff 0%, #e9f0fc 55%, #f2f6ff 100%);
+        --util-bg: #ffffff; --util-ink: #1c2b4a; --util-linea: rgba(6,22,52,.10); --hero-ink: #0b1730; --hero-muted: #3d4863; --hero-velo: linear-gradient(100deg, rgba(244,247,252,.94) 0%, rgba(240,244,251,.88) 42%, rgba(240,244,251,.55) 70%, rgba(240,244,251,.28) 100%); --hero-velo-movil: linear-gradient(180deg, rgba(244,247,252,.92) 0%, rgba(240,244,251,.86) 60%, rgba(240,244,251,.72) 100%);
     }
     :root[data-theme="dark"] {
         --bg: #070e1c; --surface: #0d1b33; --surface-2: #0a1729; --raise: #12233f;
@@ -58,6 +60,7 @@
         --shadow-lg: 0 34px 80px rgba(0,0,0,.55);
         --velo: rgba(7,14,28,.60); --pie: #05122c; --pie-ink: #9fb0d2; --pie-fuerte: #ffffff; --pie-tenue: #8497bd; --pie-linea: rgba(255,255,255,.09);
         --panel: #0a2351; --panel-ink: #eef3ff; --panel-muted: #aebfdf; --panel-linea: rgba(255,255,255,.18); --panel-suave: rgba(255,255,255,.07); --grad-seccion: linear-gradient(155deg, #0a2351 0%, #071a3d 55%, #0b2454 100%);
+        --util-bg: #0d1b33; --util-ink: #cfdbf2; --util-linea: rgba(255,255,255,.10); --hero-ink: #eef3ff; --hero-muted: #aebfdf; --hero-velo: linear-gradient(100deg, rgba(6,16,40,.94) 0%, rgba(6,16,40,.86) 42%, rgba(7,20,50,.42) 70%, rgba(7,20,50,.16) 100%); --hero-velo-movil: linear-gradient(180deg, rgba(6,16,40,.80) 0%, rgba(6,16,40,.70) 60%, rgba(7,20,50,.58) 100%);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -92,7 +95,7 @@
     @media (max-width: 640px) { .alert .msg-long { display: none; } }
 
     /* ---- utility ---- */
-    .util { background: #ffffff; color: #1c2b4a; font-size: 12.5px; border-bottom: 1px solid rgba(6,22,52,.10); }
+    .util { background: var(--util-bg); color: var(--util-ink); font-size: 12.5px; border-bottom: 1px solid var(--util-linea); }
     .util .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 32px; }
     .util .gov { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; }
     .util .dot { width: 6px; height: 6px; border-radius: 50%; background: #d1a10a; }
@@ -174,7 +177,7 @@
     }
 
     /* ---- hero ---- */
-    .hero { position: relative; overflow: hidden; background: var(--grad-hero); color: var(--hero-ink); }
+    .hero { position: relative; overflow: hidden; background: var(--grad-seccion); color: var(--hero-ink); }
     .hero .blob { position: absolute; border-radius: 50%; filter: blur(60px); opacity: .5; pointer-events: none; }
     .hero .b1 { width: 420px; height: 420px; right: -80px; top: -120px; background: radial-gradient(circle, rgba(17,131,209,.6), transparent 70%); }
     .hero .b2 { width: 360px; height: 360px; left: -120px; bottom: -160px; background: radial-gradient(circle, rgba(244,194,13,.22), transparent 70%); }
@@ -327,8 +330,8 @@
     .cbox .maplink { display: inline-flex; align-items: center; gap: 9px; background: var(--gold); color: var(--gold-ink); font-weight: 820; padding: 13px 20px; border-radius: 12px; }
     .cbox .maplink:hover { background: var(--gold-2); }
     .cbox .soc { display: flex; gap: 10px; margin-top: 20px; }
-    .cbox .soc a { width: 42px; height: 42px; border-radius: 11px; background: rgba(255,255,255,.09); border: 1px solid rgba(255,255,255,.18); display: flex; align-items: center; justify-content: center; color: #e5edfb; transition: background .15s, transform .15s; }
-    .cbox .soc a:hover { background: rgba(255,255,255,.2); transform: translateY(-2px); color: #fff; }
+    .cbox .soc a { width: 42px; height: 42px; border-radius: 11px; background: var(--panel-suave); border: 1px solid var(--panel-linea); color: var(--panel-ink); display: flex; align-items: center; justify-content: center; transition: background .15s, transform .15s; }
+    .cbox .soc a:hover { background: color-mix(in srgb, var(--blue) 18%, transparent); border-color: var(--blue); transform: translateY(-2px); color: var(--blue); }
     .cbox .soc svg { width: 20px; height: 20px; }
 
     /* ---- footer ---- */
@@ -364,15 +367,17 @@
       /* El banner nuevo es claro y su rotulo es blanco puro. Se oscurece
          bien el lado del texto —donde el rotulo saldria cortado por
          detras del titulo— y se deja ver el banner en el otro. */
-      background: linear-gradient(100deg, rgba(6,16,40,.94) 0%, rgba(6,16,40,.86) 42%,
-                                          rgba(7,20,50,.42) 70%, rgba(7,20,50,.16) 100%); }
-    @media (max-width: 760px) { .hero .fondo-ov { background: linear-gradient(180deg, rgba(6,16,40,.80) 0%, rgba(6,16,40,.70) 60%, rgba(7,20,50,.58) 100%); } }
+      background: var(--hero-velo); }
+    @media (max-width: 760px) { .hero .fondo-ov { background: var(--hero-velo-movil); } }
     .foot-flagwrap { text-align: center; padding: 26px var(--pad) 4px; }
-    /* En modo claro el cintillo (letras blancas) necesita su fondo oscuro. */
-    :root[data-theme="light"] .foot-flagwrap > img, :root:not([data-theme="dark"]) .foot-flagwrap > img {
-      background: var(--navy); border-radius: 14px; padding: 12px 18px; box-shadow: var(--shadow); }
-    @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .foot-flagwrap > img { background: transparent; padding: 0; box-shadow: none; } }
-    :root[data-theme="dark"] .foot-flagwrap > img { background: transparent; padding: 0; box-shadow: none; }
+    /* El cintillo de la República tiene letras blancas: en modo claro va
+       sobre una franja institucional de lado a lado (no una placa suelta),
+       que además separa el contenido del pie. */
+    .foot-flagwrap { background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 50%, var(--navy) 100%);
+      padding: 20px var(--pad); border-top: 1px solid var(--panel-linea); }
+    .foot-flagwrap .foot-flag { max-width: 520px; }
+    @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .foot-flagwrap { background: transparent; border-top: 0; } }
+    :root[data-theme="dark"] .foot-flagwrap { background: transparent; border-top: 0; }
     .foot-flag { display: inline-block; width: 100%; max-width: 560px; height: auto; }
     .foot .seal-img2 { height: 46px; width: auto; flex: none; }
     .hero .slogan { margin-top: 18px; font-size: clamp(1.2rem, 2.6vw, 1.7rem); font-weight: 850; font-style: italic; letter-spacing: -.015em; color: var(--gold); line-height: 1.15; }
