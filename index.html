@@ -24,6 +24,7 @@
         --maxw: 1180px; --pad: clamp(16px, 4.2vw, 30px);
         --r: 16px; --r-sm: 11px; --r-pill: 999px;
         --hero-ink: #eef3ff; --hero-muted: #aebfdf;
+        --velo: rgba(238,242,249,.74); --pie: #e7ecf7; --pie-ink: #3d4863; --pie-fuerte: #0b1730; --pie-tenue: #6a7690; --pie-linea: rgba(11,23,48,.12);
     }
     @media (prefers-color-scheme: dark) {
         :root {
@@ -33,6 +34,7 @@
             --ring: rgba(69,166,239,.5);
             --shadow: 0 1px 2px rgba(0,0,0,.45), 0 12px 34px rgba(0,0,0,.4);
             --shadow-lg: 0 34px 80px rgba(0,0,0,.55);
+            --velo: rgba(7,14,28,.60); --pie: #05122c; --pie-ink: #9fb0d2; --pie-fuerte: #ffffff; --pie-tenue: #8497bd; --pie-linea: rgba(255,255,255,.09);
         }
     }
     :root[data-theme="light"] {
@@ -42,6 +44,7 @@
         --ring: rgba(17,131,209,.45);
         --shadow: 0 1px 2px rgba(11,23,48,.05), 0 10px 26px rgba(11,23,48,.07);
         --shadow-lg: 0 30px 70px rgba(10,35,81,.22);
+        --velo: rgba(238,242,249,.74); --pie: #e7ecf7; --pie-ink: #3d4863; --pie-fuerte: #0b1730; --pie-tenue: #6a7690; --pie-linea: rgba(11,23,48,.12);
     }
     :root[data-theme="dark"] {
         --bg: #070e1c; --surface: #0d1b33; --surface-2: #0a1729; --raise: #12233f;
@@ -50,6 +53,7 @@
         --ring: rgba(69,166,239,.5);
         --shadow: 0 1px 2px rgba(0,0,0,.45), 0 12px 34px rgba(0,0,0,.4);
         --shadow-lg: 0 34px 80px rgba(0,0,0,.55);
+        --velo: rgba(7,14,28,.60); --pie: #05122c; --pie-ink: #9fb0d2; --pie-fuerte: #ffffff; --pie-tenue: #8497bd; --pie-linea: rgba(255,255,255,.09);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -129,8 +133,41 @@
       background-size: cover; background-position: center; opacity: .78; }
     /* Velo oscuro encima del banner: se sigue viendo, pero el texto se lee. */
     .fondo-velo { position: fixed; inset: 0; z-index: -1; pointer-events: none;
-      background: rgba(7,14,28,.60); }
-    @media (max-width: 760px) { .fondo-global { opacity: .7; } .fondo-velo { background: rgba(7,14,28,.72); } }
+      background: var(--velo); }
+    @media (max-width: 760px) { .fondo-global { opacity: .7; } }
+
+    /* =====================================================================
+       ACABADO: detalles de interfaz moderna, iguales en modo claro y oscuro.
+       Todo con los colores del tema (nada fijo), y respetando a quien pide
+       menos animación en su sistema.
+       ===================================================================== */
+    :root { --trans: 180ms cubic-bezier(.2,.7,.3,1); --glow: 0 0 0 1px color-mix(in srgb, var(--blue) 35%, transparent), 0 10px 30px color-mix(in srgb, var(--blue) 18%, transparent); }
+
+    a, button, .card, .tram-card, .cbox, .dpanel, .item, summary { transition: color var(--trans), background-color var(--trans), border-color var(--trans), box-shadow var(--trans), transform var(--trans); }
+
+    /* Las tarjetas se levantan un poco y se iluminan al pasar por encima. */
+    .card:hover, .tram-card:hover, .news-card:hover, .dep:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); border-color: color-mix(in srgb, var(--blue) 45%, var(--line)); }
+
+    /* Foco visible para quien navega con el teclado. */
+    a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible {
+      outline: 2px solid var(--blue); outline-offset: 2px; border-radius: 8px; }
+
+    /* Rejilla técnica muy suave sobre el fondo: da aire de panel digital. */
+    .fondo-velo::after { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .5;
+      background-image:
+        linear-gradient(color-mix(in srgb, var(--blue) 12%, transparent) 1px, transparent 1px),
+        linear-gradient(90deg, color-mix(in srgb, var(--blue) 12%, transparent) 1px, transparent 1px);
+      background-size: 44px 44px;
+      -webkit-mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 72%);
+              mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 72%); }
+
+    /* Los títulos de sección con una línea de acento degradada. */
+    section h2 { position: relative; }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+      .card:hover, .tram-card:hover, .news-card:hover, .dep:hover { transform: none; }
+    }
 
     /* ---- hero ---- */
     .hero { position: relative; overflow: hidden; background: var(--grad-hero); color: var(--hero-ink); }
@@ -291,18 +328,18 @@
     .cbox .soc svg { width: 20px; height: 20px; }
 
     /* ---- footer ---- */
-    footer.site { background: #05122c; color: #9fb0d2; }
+    footer.site { background: var(--pie); color: var(--pie-ink); }
     .foot { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 28px; padding-top: 44px; padding-bottom: 30px; }
     @media (max-width: 720px) { .foot { grid-template-columns: 1fr; gap: 22px; } }
     .foot .brand2 { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
     .foot .brand2 .seal { width: 42px; height: 42px; }
-    .foot .brand2 strong { color: #fff; font-size: 14px; font-weight: 850; display: block; }
+    .foot .brand2 strong { color: var(--pie-fuerte); font-size: 14px; font-weight: 850; display: block; }
     .foot .brand2 span { font-size: 12px; }
-    .foot .col h4 { color: #fff; font-size: 12px; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 12px; font-weight: 800; }
+    .foot .col h4 { color: var(--pie-fuerte); font-size: 12px; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 12px; font-weight: 800; }
     .foot .col a { display: block; padding: 5px 0; font-size: 13.5px; }
-    .foot .col a:hover { color: #fff; }
-    .foot p.about { font-size: 13px; color: #8497bd; max-width: 40ch; }
-    .foot-note { border-top: 1px solid rgba(255,255,255,.09); font-size: 12.5px; color: #7386ac; padding-top: 16px; padding-bottom: 30px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .foot .col a:hover { color: var(--pie-fuerte); }
+    .foot p.about { font-size: 13px; color: var(--pie-tenue); max-width: 40ch; }
+    .foot-note { border-top: 1px solid var(--pie-linea); font-size: 12.5px; color: var(--pie-tenue); padding-top: 16px; padding-bottom: 30px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 
     .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
     .reveal.in { opacity: 1; transform: none; }
@@ -327,12 +364,17 @@
                                           rgba(7,20,50,.42) 70%, rgba(7,20,50,.16) 100%); }
     @media (max-width: 760px) { .hero .fondo-ov { background: linear-gradient(180deg, rgba(6,16,40,.80) 0%, rgba(6,16,40,.70) 60%, rgba(7,20,50,.58) 100%); } }
     .foot-flagwrap { text-align: center; padding: 26px var(--pad) 4px; }
+    /* En modo claro el cintillo (letras blancas) necesita su fondo oscuro. */
+    :root[data-theme="light"] .foot-flagwrap > img, :root:not([data-theme="dark"]) .foot-flagwrap > img {
+      background: var(--navy); border-radius: 14px; padding: 12px 18px; box-shadow: var(--shadow); }
+    @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .foot-flagwrap > img { background: transparent; padding: 0; box-shadow: none; } }
+    :root[data-theme="dark"] .foot-flagwrap > img { background: transparent; padding: 0; box-shadow: none; }
     .foot-flag { display: inline-block; width: 100%; max-width: 560px; height: auto; }
     .foot .seal-img2 { height: 46px; width: auto; flex: none; }
     .hero .slogan { margin-top: 18px; font-size: clamp(1.2rem, 2.6vw, 1.7rem); font-weight: 850; font-style: italic; letter-spacing: -.015em; color: var(--gold); line-height: 1.15; }
     .hero .slogan span { display: block; margin-top: 7px; font-style: normal; font-weight: 800; font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: var(--hero-muted); }
     .foot-slogan { margin-top: 10px; font-style: italic; font-weight: 800; color: var(--gold); font-size: 14px; }
-    .foot-slogan span { display: block; font-style: normal; font-weight: 700; font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: #8497bd; margin-top: 2px; }
+    .foot-slogan span { display: block; font-style: normal; font-weight: 700; font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--pie-tenue); margin-top: 2px; }
 
     /* ---- tasa BCV (barra utility) ---- */
     .util .wrap { flex-wrap: wrap; row-gap: 3px; }
