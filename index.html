@@ -92,10 +92,10 @@
     #themeBtn:hover { background: rgba(6,22,52,.10); }
     @media (max-width: 520px) { .util .gov .long { display: none; } }
 
-    /* La franja tricolor no se va al bajar: queda fija al pie de la
-       pantalla, siempre a la vista. */
-    header.site + .tricolor { position: fixed; bottom: 0; left: 0; right: 0; z-index: 61; }
-    body { padding-bottom: 5px; }
+    /* La franja tricolor va dentro de la barra del menú: como esa barra se
+       queda pegada arriba al bajar, la franja la acompaña siempre, justo
+       debajo del menú. */
+    header.site .tricolor { position: absolute; left: 0; right: 0; bottom: -5px; }
 
     /* ---- header ---- */
     header.site { position: sticky; top: 0; z-index: 60; background: color-mix(in srgb, var(--surface) 86%, transparent); backdrop-filter: saturate(150%) blur(12px); border-bottom: 1px solid var(--line); }
@@ -455,8 +455,8 @@
         </nav>
         <span class="yuh" role="img" aria-label="Yuhismar Hernández · Alcaldesa"></span>
     </div>
+  <div class="tricolor"><i class="c1"></i><i class="c2"></i><i class="c3"></i></div>
 </header>
-<div class="tricolor"><i class="c1"></i><i class="c2"></i><i class="c3"></i></div>
 
 <!-- HERO -->
 <main id="contenido">
