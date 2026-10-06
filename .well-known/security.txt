@@ -1,0 +1,4 @@
+Contact: mailto:admin@alcaldiadecharallave.com
+Expires: 2027-04-06T23:59:59Z
+Preferred-Languages: es
+Canonical: https://alcaldiadecharallave.com/.well-known/security.txt
