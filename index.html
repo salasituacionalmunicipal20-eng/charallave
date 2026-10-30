@@ -759,6 +759,7 @@
     </div>
 </footer>
 
+<script src="coordinacion-telecomunicaciones.js?v=20261030"></script>
 <script>
     (function () {
         var root = document.documentElement;
@@ -879,7 +880,8 @@ var DEPENDENCIAS = [{"sector":"Dirección Superior","nombre":"Despacho del Alcal
     var MOSTRAR_CORREOS = false;
     var grid = document.getElementById('depGrid'), chips = document.getElementById('depChips'), q = document.getElementById('depQ');
     if (!grid || typeof DEPENDENCIAS === 'undefined') return;
-    var SECT = ['Todas', 'Dirección Superior', 'Seguridad y Defensa', 'Cultura y Comunicación', 'Vivienda y Desarrollo Urbano', 'Desarrollo Social', 'Talento Humano', 'Institutos Autónomos'];
+    if (typeof COORDINACION_TELECOMUNICACIONES !== 'undefined') DEPENDENCIAS.push(COORDINACION_TELECOMUNICACIONES);
+    var SECT = ['Todas', 'Dirección Superior', 'Tecnología y Telecomunicaciones', 'Seguridad y Defensa', 'Cultura y Comunicación', 'Vivienda y Desarrollo Urbano', 'Desarrollo Social', 'Talento Humano', 'Institutos Autónomos'];
     var st = { q: '', sec: 'Todas' };
     SECT.forEach(function (c) {
         var b = document.createElement('button'); b.type = 'button'; b.className = 'chip' + (c === 'Todas' ? ' on' : ''); b.textContent = c;
@@ -891,7 +893,7 @@ var DEPENDENCIAS = [{"sector":"Dirección Superior","nombre":"Despacho del Alcal
     function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
     function blk(icon, label, text) { return text ? '<div class="blk"><span class="lbl">' + icon + ' ' + label + '</span><p>' + esc(text) + '</p></div>' : ''; }
     function lista(icon, label, arr) { return (arr && arr.length) ? '<div class="blk"><span class="lbl">' + icon + ' ' + label + '</span><ul>' + arr.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul></div>' : ''; }
-    function correo(c) { return (MOSTRAR_CORREOS && c) ? '<div class="blk"><span class="lbl">✉️ Correo</span><p><a class="dep-mail" href="mailto:' + esc(c) + '">' + esc(c) + '</a></p></div>' : ''; }
+    function correo(c, verificado) { return ((MOSTRAR_CORREOS || verificado) && c) ? '<div class="blk"><span class="lbl">✉️ Correo</span><p><a class="dep-mail" href="mailto:' + esc(c) + '">' + esc(c) + '</a></p></div>' : ''; }
     function render() {
         var qq = norm(st.q);
         var list = DEPENDENCIAS.filter(function (d) {
@@ -903,7 +905,7 @@ var DEPENDENCIAS = [{"sector":"Dirección Superior","nombre":"Despacho del Alcal
         if (!list.length) { grid.innerHTML = '<div class="dep-empty">No encontramos dependencias con esa búsqueda. Prueba otra palabra o filtra por área.</div>'; return; }
         grid.innerHTML = list.map(function (d) {
             return '<details class="dep"><summary><span class="stag">' + esc(d.sector) + '</span><h3>' + esc(d.nombre) + '</h3><span class="chev" aria-hidden="true">+</span></summary>' +
-                '<div class="dep-body">' + blk('📄', 'Descripción', d.desc) + lista('📋', 'Detalle', d.detalle) + blk('🎯', 'Misión', d.mision) + blk('🌅', 'Visión', d.vision) + correo(d.correo) + '</div></details>';
+                '<div class="dep-body">' + blk('📄', 'Descripción', d.desc) + lista('📋', 'Detalle', d.detalle) + blk('🎯', 'Misión', d.mision) + blk('🌅', 'Visión', d.vision) + correo(d.correo, d.correoVerificado) + '</div></details>';
         }).join('');
     }
     q.addEventListener('input', function () { st.q = q.value; render(); });
