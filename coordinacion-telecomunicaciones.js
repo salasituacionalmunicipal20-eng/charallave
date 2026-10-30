@@ -1,6 +1,6 @@
 /* Contenido de la solicitud institucional n.º 6 del Centro de Control. */
 var COORDINACION_TELECOMUNICACIONES = {
-    sector: 'Tecnología y Telecomunicaciones',
+    sector: 'Coordinación de Telecomunicaciones',
     nombre: 'Coordinación de Telecomunicaciones',
     desc: 'La Coordinación de Telecomunicaciones impulsa la conectividad, la economía digital y la educación a distancia como servicios de primera necesidad. Trabaja junto a instituciones del Estado y operadoras privadas para facilitar el despliegue de redes de fibra óptica, la atención de averías en las comunidades y la transformación digital municipal. Apoya la operatividad tecnológica interna y la comunicación con las comunidades.',
     detalle: [

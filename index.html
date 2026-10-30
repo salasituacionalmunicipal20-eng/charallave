@@ -759,7 +759,7 @@
     </div>
 </footer>
 
-<script src="coordinacion-telecomunicaciones.js?v=20261030"></script>
+<script src="coordinacion-telecomunicaciones.js?v=20261030b"></script>
 <script>
     (function () {
         var root = document.documentElement;
@@ -881,7 +881,7 @@ var DEPENDENCIAS = [{"sector":"Dirección Superior","nombre":"Despacho del Alcal
     var grid = document.getElementById('depGrid'), chips = document.getElementById('depChips'), q = document.getElementById('depQ');
     if (!grid || typeof DEPENDENCIAS === 'undefined') return;
     if (typeof COORDINACION_TELECOMUNICACIONES !== 'undefined') DEPENDENCIAS.push(COORDINACION_TELECOMUNICACIONES);
-    var SECT = ['Todas', 'Dirección Superior', 'Tecnología y Telecomunicaciones', 'Seguridad y Defensa', 'Cultura y Comunicación', 'Vivienda y Desarrollo Urbano', 'Desarrollo Social', 'Talento Humano', 'Institutos Autónomos'];
+    var SECT = ['Todas', 'Dirección Superior', 'Coordinación de Telecomunicaciones', 'Seguridad y Defensa', 'Cultura y Comunicación', 'Vivienda y Desarrollo Urbano', 'Desarrollo Social', 'Talento Humano', 'Institutos Autónomos'];
     var st = { q: '', sec: 'Todas' };
     SECT.forEach(function (c) {
         var b = document.createElement('button'); b.type = 'button'; b.className = 'chip' + (c === 'Todas' ? ' on' : ''); b.textContent = c;
