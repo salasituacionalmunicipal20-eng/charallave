@@ -199,7 +199,7 @@
 
     /* ---- accesos rápidos (top tasks) ---- */
     .tasks { margin-top: -34px; position: relative; z-index: 5; padding-bottom: clamp(30px,5vw,54px); }
-    .tasks-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .tasks-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
     @media (max-width: 900px) { .tasks-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 480px) { .tasks-grid { grid-template-columns: 1fr 1fr; } }
     .task { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 18px 16px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 10px; transition: transform .16s, box-shadow .16s, border-color .16s; }
@@ -239,6 +239,13 @@
     .badge.pres { background: var(--surface-2); color: var(--muted); border: 1px solid var(--line); }
     .tram-card a.go { font-size: 13.5px; font-weight: 800; color: var(--blue); display: inline-flex; align-items: center; gap: 5px; }
     .empty { grid-column: 1/-1; text-align: center; padding: 40px; color: var(--muted); }
+    .procedimiento-intro { max-width: 75ch; color: var(--ink-soft); }
+    #permisos .dep-body p { color: var(--ink-soft); font-size: .94rem; line-height: 1.7; margin-top: 14px; }
+    .catastro-casos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
+    .catastro-casos h3 { font-size: 1.06rem; color: var(--ink); margin-bottom: 12px; }
+    .catastro-casos ul { padding-left: 22px; color: var(--ink-soft); line-height: 1.7; }
+    .catastro-casos li { margin: 8px 0; }
+    @media (max-width: 760px) { .catastro-casos { grid-template-columns: 1fr; gap: 24px; } }
 
     /* ---- gobierno digital ---- */
     .digital { position: relative; overflow: hidden; color: var(--panel-ink);
@@ -524,7 +531,7 @@
     <div class="wrap inner">
         <p class="eyebrow">Portal Ciudadano · Gobierno Municipal</p>
         <h1>Charallave, más cerca de <span class="u">ti</span></h1>
-        <p class="slogan">«Imparable»<span>Yuhismar Hernández · Alcaldesa</span></p>
+        <p class="slogan">«Indetenible»<span>Yuhismar Hernández · Alcaldesa</span></p>
         <p class="lead">Haz tus trámites, encuentra servicios y accede a la atención de la Alcaldía del Municipio Cristóbal Rojas — desde tu teléfono, cuando lo necesites.</p>
         <form class="search" onsubmit="return false;" role="search">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
@@ -536,6 +543,7 @@
             <a href="#tramites" data-q="acta">Actas y constancias</a>
             <a href="#tramites" data-q="impuesto">Pagos e impuestos</a>
             <a href="#tramites" data-q="permiso">Permisos</a>
+            <a href="#tramites" data-q="catastro">Catastro</a>
             <a href="#emergencia" data-q="">Ayuda por el sismo</a>
         </div>
     </div>
@@ -558,7 +566,11 @@
         </a>
         <a class="task" href="#tramites" data-q="permiso">
             <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m14 3 7 7-4 4-7-7zM11 6 3 14v4h4l8-8"/></svg></span>
-            <b>Permisos y catastro</b><span>Construcción y usos</span>
+            <b>Permisos</b><span>Todos los permisos de Urbanismo</span>
+        </a>
+        <a class="task" href="#tramites" data-q="catastro">
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 7 6-3 6 3 6-3v13l-6 3-6-3-6 3zM9 4v13M15 7v13"/></svg></span>
+            <b>Catastro</b><span>Actualización de la cédula catastral</span>
         </a>
     </div>
 </div>
@@ -574,6 +586,44 @@
         </div>
         <div class="filters" id="chips" role="tablist" aria-label="Categorías"></div>
         <div class="tram-grid" id="tramGrid"></div>
+    </div>
+</section>
+
+<!-- PERMISOS Y CATASTRO -->
+<section class="tram" id="permisos" aria-labelledby="permisosTitulo">
+    <div class="wrap">
+        <div class="sec-head">
+            <h2 id="permisosTitulo">Permisos</h2>
+            <div class="rule"></div>
+            <p class="procedimiento-intro">Consulta la información de Urbanismo y abre el permiso que necesitas para conocer su alcance.</p>
+        </div>
+        <div class="dep-grid">
+            <details class="dep"><summary><h3>Permiso de construcción</h3><span class="chev" aria-hidden="true">+</span></summary><div class="dep-body"><p>Es emitido por las autoridades competentes y autoriza el inicio de las obras de edificación según los planos del proyecto, previo pago de las tasas y derechos correspondientes. También se conoce como licencia de obras, permiso de edificación, permiso de obras o permiso para construcción.</p></div></details>
+            <details class="dep"><summary><h3>Permiso de construcción menor</h3><span class="chev" aria-hidden="true">+</span></summary><div class="dep-body"><p>Es requerido por una persona natural o jurídica para realizar construcciones en un domicilio particular, comercio, oficina o inmueble: ampliaciones de plantas, cerramientos totales o frontales de terrenos, arreglos varios, cambio de techo o cubiertas sin cambiar su forma y pendiente, cambios de pisos, piezas sanitarias y remodelaciones de fachada que no supongan una alteración del volumen o del uso de las instalaciones comunes o privadas.</p></div></details>
+            <details class="dep"><summary><h3>Permiso de evento</h3><span class="chev" aria-hidden="true">+</span></summary><div class="dep-body"><p>Es la autorización que se otorga a personas naturales o jurídicas que pretendan realizar eventos o espectáculos públicos dentro del municipio.</p></div></details>
+            <details class="dep"><summary><h3>Movimiento de tierra</h3><span class="chev" aria-hidden="true">+</span></summary><div class="dep-body"><p>Es el proceso de aflojar, acarrear y depositar materiales de la corteza terrestre desde su localización hasta el sitio de disposición final de una construcción. Se realiza para moldear el terreno a las necesidades de la edificación, en seco o bajo el agua.</p></div></details>
+            <details class="dep"><summary><h3>Permiso de tala y poda</h3><span class="chev" aria-hidden="true">+</span></summary><div class="dep-body"><p>La tala y poda implica el corte de árboles. Estas actividades pueden ocasionar deforestación y daños al medio ambiente y a la biodiversidad. Los árboles aportan beneficios al ecosistema y a las personas, entre ellos la producción de oxígeno.</p></div></details>
+            <details class="dep"><summary><h3>Permiso de traslado de desechos sólidos</h3><span class="chev" aria-hidden="true">+</span></summary><div class="dep-body"><p>Permite solicitar el traslado de Residuos Sólidos Industriales No Peligrosos (RSINP) a su lugar de disposición, denominado destinatario. Este también debe contar con la correspondiente autorización sanitaria.</p></div></details>
+            <details class="dep"><summary><h3>Publicidad comercial</h3><span class="chev" aria-hidden="true">+</span></summary><div class="dep-body"><p>Es una forma de comunicación pagada que busca dar a conocer, promover y vender bienes, servicios o marcas a un público específico para generar un beneficio económico.</p></div></details>
+            <details class="dep"><summary><h3>Publicidad en vallas</h3><span class="chev" aria-hidden="true">+</span></summary><div class="dep-body"><p>Es una estrategia de comunicación visual y exterior que utiliza grandes estructuras planas, situadas en zonas de mucho tránsito, para mostrar anuncios comerciales.</p></div></details>
+            <details class="dep"><summary><h3>Limpieza de terreno</h3><span class="chev" aria-hidden="true">+</span></summary><div class="dep-body"><p>En la construcción, comprende los trabajos preliminares para retirar basura, escombros, maleza, arbustos y la capa vegetal superficial de un predio, dejándolo despejado y seguro antes de iniciar una obra o excavación.</p></div></details>
+            <details class="dep"><summary><h3>Habitabilidad</h3><span class="chev" aria-hidden="true">+</span></summary><div class="dep-body"><p>Es la cualidad de un lugar o vivienda de ser apto para ser habitado. Reúne las condiciones necesarias de seguridad, comodidad, salud y espacio para vivir o realizar actividades diarias de manera digna y sin riesgos.</p></div></details>
+        </div>
+        <p class="procedimiento-intro" style="margin-top:24px">Toda solicitud y permisología realizada en esta dirección debe cancelar el arancel correspondiente a su tramitación en el banco señalado.</p>
+    </div>
+</section>
+
+<section class="tram" id="catastro" aria-labelledby="catastroTitulo">
+    <div class="wrap">
+        <div class="sec-head">
+            <h2 id="catastroTitulo">Actualización de la cédula catastral</h2>
+            <div class="rule"></div>
+            <p class="procedimiento-intro">Requisitos de la Dirección de Catastro Municipal para actualizar la cédula catastral de tu inmueble.</p>
+        </div>
+        <div class="catastro-casos">
+            <div><h3>Si tienes la cédula catastral</h3><ul><li>Copia de la última cédula catastral.</li></ul></div>
+            <div><h3>Si no tienes la cédula catastral</h3><ul><li>Original y copia del documento de propiedad del inmueble.</li><li>Copia de la cédula de identidad del propietario.</li></ul></div>
+        </div>
     </div>
 </section>
 
@@ -748,9 +798,9 @@
                 <div><strong>Alcaldía del Municipio Cristóbal Rojas</strong><span>Charallave · Estado Bolivariano de Miranda</span></div>
             </div>
             <p class="about">Gobierno municipal al servicio del pueblo de Charallave. Trámites, servicios y atención al ciudadano.</p>
-            <p class="foot-slogan">«Imparable»<span>Yuhismar Hernández · Alcaldesa</span></p>
+            <p class="foot-slogan">«Indetenible»<span>Yuhismar Hernández · Alcaldesa</span></p>
         </div>
-        <div class="col"><h4>Trámites</h4><a href="#tramites">Registro Civil</a><a href="#tramites">Pagos e impuestos</a><a href="#tramites">Permisos y catastro</a><a href="#emergencia">Ayuda por el sismo</a></div>
+        <div class="col"><h4>Trámites</h4><a href="#tramites">Registro Civil</a><a href="#tramites" data-q="impuesto">Pagos e impuestos</a><a href="#permisos">Permisos</a><a href="#catastro">Catastro</a><a href="#emergencia">Ayuda por el sismo</a></div>
         <div class="col"><h4>Institución</h4><a href="#municipio">El Municipio</a><a href="#gestion">Filosofía de gestión</a><a href="#direcciones">Direcciones</a><a href="#digital">Gobierno Digital</a><a href="#noticias">Noticias</a><a href="#contacto">Contacto</a></div>
     </div>
     <div class="wrap foot-note">
@@ -778,6 +828,7 @@
 
         // --- Directorio de trámites ---
         var LINK_HS = 'https://salasituacional.alcaldiadecharallave.com/hogares-solidarios.html';
+        var LINK_PAGOS = 'https://share.google/K2Dm8x7WlkNkAZ5oW';
         var TRAMITES = [
             { n: 'Acta de nacimiento', c: 'Documentos', d: 'Solicitud y copia certificada del acta de nacimiento.' },
             { n: 'Acta de matrimonio', c: 'Documentos', d: 'Copia certificada del acta de matrimonio.' },
@@ -786,9 +837,9 @@
             { n: 'Pago de impuestos municipales', c: 'Pagos y tributos', d: 'Cancela tus tributos municipales y mantente al día.' },
             { n: 'Solvencia municipal', c: 'Pagos y tributos', d: 'Documento que certifica que estás solvente con la Alcaldía.' },
             { n: 'Patente de industria y comercio', c: 'Pagos y tributos', d: 'Registro y pago de la patente para tu comercio o industria.' },
-            { n: 'Ficha catastral', c: 'Permisos y catastro', d: 'Cédula catastral y datos del inmueble.' },
-            { n: 'Permiso de construcción', c: 'Permisos y catastro', d: 'Autorización para obras y remodelaciones.' },
-            { n: 'Conformidad de uso', c: 'Permisos y catastro', d: 'Constancia del uso permitido para un local o inmueble.' },
+            { n: 'Permisos', c: 'Permisos', d: 'Todos los permisos de Urbanismo: construcción, obras menores, eventos, publicidad, movimiento de tierra, tala, poda, desechos, limpieza de terrenos y habitabilidad.', busqueda: 'Permiso de construcción Permiso de construcción menor Permiso de evento Permiso de tala y poda Permiso de traslado de desechos sólidos Publicidad comercial Publicidad en vallas Limpieza de terreno Habitabilidad', guia: '#permisos' },
+            { n: 'Conformidad de uso', c: 'Pagos y tributos', d: 'Certificación para instalar un comercio, oficina, fábrica, centro asistencial o educacional con una actividad permitida por la ordenanza de zonificación vigente, antes de solicitar la licencia de actividades económicas.' },
+            { n: 'Actualización de la cédula catastral', c: 'Catastro', d: 'Consulta los requisitos para actualizar la cédula catastral de tu inmueble.', guia: '#catastro' },
             { n: 'Reporte de alumbrado o bache', c: 'Ciudad y ambiente', d: 'Notifica fallas en el alumbrado o daños en la vía.' },
             { n: 'Aseo urbano y recolección', c: 'Ciudad y ambiente', d: 'Solicitudes relacionadas con la recolección de desechos.' },
             { n: 'Registro Hogares Solidarios (sismo)', c: 'Emergencias', d: 'Registro de familias afectadas por el sismo que se mudaron a Charallave.', online: true, url: LINK_HS },
@@ -798,7 +849,7 @@
             { n: 'Registro de Vehículo (INTT)', c: 'Trámites nacionales', d: 'Certificado de Registro de Vehículo ante el Instituto Nacional de Transporte Terrestre. Recaudos: documento de propiedad (factura o título), cédula del propietario y datos del vehículo, conforme a la Ley de Transporte Terrestre.', online: true, url: 'https://www.intt.gob.ve' },
             { n: 'Ayudas sociales', c: 'Atención', d: 'Programas de apoyo a familias y personas vulnerables.' }
         ];
-        var CATS = ['Todos', 'Documentos', 'Pagos y tributos', 'Permisos y catastro', 'Ciudad y ambiente', 'Emergencias', 'Atención', 'Trámites nacionales'];
+        var CATS = ['Todos', 'Documentos', 'Pagos y tributos', 'Permisos', 'Catastro', 'Ciudad y ambiente', 'Emergencias', 'Atención', 'Trámites nacionales'];
         var st = { q: '', cat: 'Todos' };
         var grid = document.getElementById('tramGrid'), chips = document.getElementById('chips');
 
@@ -814,14 +865,16 @@
             var q = norm(st.q);
             var list = TRAMITES.filter(function (t) {
                 if (st.cat !== 'Todos' && t.c !== st.cat) return false;
-                if (q && norm(t.n + ' ' + t.c + ' ' + t.d).indexOf(q) < 0) return false;
+                if (q && norm(t.n + ' ' + t.c + ' ' + t.d + ' ' + (t.busqueda || '')).indexOf(q) < 0) return false;
                 return true;
             });
             count.textContent = list.length + (list.length === 1 ? ' trámite' : ' trámites');
             if (!list.length) { grid.innerHTML = '<div class="empty">No encontramos trámites con esa búsqueda. Prueba otra palabra o revisa por categoría.</div>'; return; }
             grid.innerHTML = list.map(function (t) {
                 var badge = t.online ? '<span class="badge on">● En línea</span>' : '<span class="badge pres">Presencial</span>';
-                var go = t.online ? '<a class="go" href="' + t.url + '" target="_blank" rel="noopener">Abrir →</a>' : '<a class="go" href="#contacto">Cómo hacerlo →</a>';
+                var enlace = t.c === 'Pagos y tributos' ? LINK_PAGOS : (t.guia || '#contacto');
+                var externo = /^https:\/\//.test(enlace) ? ' target="_blank" rel="noopener"' : '';
+                var go = t.online ? '<a class="go" href="' + t.url + '" target="_blank" rel="noopener">Abrir →</a>' : '<a class="go" href="' + enlace + '"' + externo + '>Cómo hacerlo →</a>';
                 return '<div class="tram-card"><div class="cat">' + t.c + '</div><h3>' + t.n + '</h3><p>' + t.d + '</p><div class="foot">' + badge + go + '</div></div>';
             }).join('');
         }
