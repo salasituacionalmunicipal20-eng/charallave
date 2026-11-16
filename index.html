@@ -507,7 +507,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
         </button>
         <nav class="main" id="nav" aria-label="Principal">
-            <a href="#tramites">Trámites</a>
+            <a href="#tramites" data-cat="Todos">Trámites</a>
             <a href="https://regcivil.alcaldiadecharallave.com/">Registro Civil</a>
             <a href="#emergencia">Emergencia</a>
             <a href="#digital">Gobierno Digital</a>
@@ -541,9 +541,9 @@
         <div class="chips-quick">
             <span style="color:var(--hero-muted);font-size:13px;font-weight:650;align-self:center;">Popular:</span>
             <a href="#tramites" data-q="acta">Actas y constancias</a>
-            <a href="#tramites" data-q="impuesto">Pagos e impuestos</a>
-            <a href="#tramites" data-q="permiso">Permisos</a>
-            <a href="#tramites" data-q="catastro">Catastro</a>
+            <a href="#tramites" data-cat="Pagos y tributos">Pagos e impuestos</a>
+            <a href="#tramites" data-cat="Permisos">Permisos</a>
+            <a href="#tramites" data-cat="Catastro">Catastro</a>
             <a href="#emergencia" data-q="">Ayuda por el sismo</a>
         </div>
     </div>
@@ -560,15 +560,15 @@
             <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l3 3v15H6z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></span>
             <b>Registro Civil</b><span>Actas y constancias · en línea</span>
         </a>
-        <a class="task" href="#tramites" data-q="impuesto">
+        <a class="task" href="#tramites" data-cat="Pagos y tributos">
             <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span>
             <b>Pagos e impuestos</b><span>Tributos y solvencias</span>
         </a>
-        <a class="task" href="#tramites" data-q="permiso">
+        <a class="task" href="#tramites" data-cat="Permisos">
             <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m14 3 7 7-4 4-7-7zM11 6 3 14v4h4l8-8"/></svg></span>
             <b>Permisos</b><span>Todos los permisos de Urbanismo</span>
         </a>
-        <a class="task" href="#tramites" data-q="catastro">
+        <a class="task" href="#tramites" data-cat="Catastro">
             <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 7 6-3 6 3 6-3v13l-6 3-6-3-6 3zM9 4v13M15 7v13"/></svg></span>
             <b>Catastro</b><span>Actualización de la cédula catastral</span>
         </a>
@@ -800,7 +800,7 @@
             <p class="about">Gobierno municipal al servicio del pueblo de Charallave. Trámites, servicios y atención al ciudadano.</p>
             <p class="foot-slogan">«Indetenible»<span>Yuhismar Hernández · Alcaldesa</span></p>
         </div>
-        <div class="col"><h4>Trámites</h4><a href="#tramites">Registro Civil</a><a href="#tramites" data-q="impuesto">Pagos e impuestos</a><a href="#permisos">Permisos</a><a href="#catastro">Catastro</a><a href="#emergencia">Ayuda por el sismo</a></div>
+        <div class="col"><h4>Trámites</h4><a href="#tramites" data-cat="Documentos">Registro Civil</a><a href="#tramites" data-cat="Pagos y tributos">Pagos e impuestos</a><a href="#permisos">Permisos</a><a href="#catastro">Catastro</a><a href="#emergencia">Ayuda por el sismo</a></div>
         <div class="col"><h4>Institución</h4><a href="#municipio">El Municipio</a><a href="#gestion">Filosofía de gestión</a><a href="#direcciones">Direcciones</a><a href="#digital">Gobierno Digital</a><a href="#noticias">Noticias</a><a href="#contacto">Contacto</a></div>
     </div>
     <div class="wrap foot-note">
@@ -855,10 +855,22 @@
 
         CATS.forEach(function (c) {
             var b = document.createElement('button'); b.className = 'chip' + (c === 'Todos' ? ' on' : ''); b.textContent = c; b.type = 'button';
-            b.addEventListener('click', function () { st.cat = c; chips.querySelectorAll('.chip').forEach(function (x) { x.classList.toggle('on', x === b); }); render(); });
+            b.setAttribute('aria-pressed', c === 'Todos' ? 'true' : 'false');
+            b.addEventListener('click', function () { seleccionarCategoria(c); });
             chips.appendChild(b);
         });
         var count = document.createElement('span'); count.id = 'tramCount'; chips.appendChild(count);
+
+        function seleccionarCategoria(c, consulta) {
+            st.cat = c; st.q = consulta || '';
+            document.getElementById('q').value = st.q;
+            chips.querySelectorAll('.chip').forEach(function (b) {
+                var activa = b.textContent === c;
+                b.classList.toggle('on', activa);
+                b.setAttribute('aria-pressed', activa ? 'true' : 'false');
+            });
+            render();
+        }
 
         function norm(s) { return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); }
         function render() {
@@ -882,10 +894,13 @@
 
         // Buscador del hero + chips populares
         var q = document.getElementById('q');
-        q.addEventListener('input', function () { st.q = q.value; render(); });
+        q.addEventListener('input', function () { seleccionarCategoria('Todos', q.value); });
         document.getElementById('qBtn').addEventListener('click', function () { document.getElementById('tramites').scrollIntoView({ behavior: 'smooth' }); });
         document.querySelectorAll('[data-q]').forEach(function (a) {
-            a.addEventListener('click', function () { var v = a.getAttribute('data-q'); if (v) { st.q = v; q.value = v; st.cat = 'Todos'; chips.querySelectorAll('.chip').forEach(function (x, i) { x.classList.toggle('on', i === 0); }); render(); } });
+            a.addEventListener('click', function () { seleccionarCategoria('Todos', a.getAttribute('data-q')); });
+        });
+        document.querySelectorAll('[data-cat]').forEach(function (a) {
+            a.addEventListener('click', function () { seleccionarCategoria(a.getAttribute('data-cat')); });
         });
 
         // Reveal
